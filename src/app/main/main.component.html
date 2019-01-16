@@ -1,3 +1,29 @@
-<p>
-  main works!
-</p>
+<div *ngIf="slide">
+  <!-- Image Component -->
+  <div class="row">
+    <div class="col-md-1">
+      <span class="glyphicon glyphicon-chevron-left" *ngIf="!slide.isFirstSlide" (click)="changeSlide(slide.slideNum-1)"></span>
+    </div>
+    <div class="col-md-10">
+      <app-image [imagePath]="slide.imagePath"></app-image>
+    </div>
+    <div class="col-md-1">
+      <span class="glyphicon glyphicon-chevron-right" *ngIf="!slide.isLastSlide" (click)="changeSlide(slide.slideNum+1)"></span>
+    </div>
+  </div>
+
+  <!-- AudioComponent -->
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <app-audio [audioPath]="slide.audioPath"></app-audio>
+    </div>
+  </div>
+
+  <!-- TextComponent -->
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="textDiv">
+      <app-text [text]="slide.text"></app-text>
+    </div>
+  </div>
+
+</div>

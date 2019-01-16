@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { SlideInfo } from './SlideInfo';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -13,13 +15,16 @@ const httpOptions = {
 })
 
 export class SlideService {
-  private actionUrl: string;
+  private baseUrl = "http://localhost:4000/api";
 
   constructor(private http: HttpClient) {
-    this.actionUrl = "http://localhost:4000/api/slide/";
+
   }
 
-  public getSlide<T>(id: string): Observable<T> {
-    return this.http.get<T>(this.actionUrl + id, httpOptions);
+  public getSlide(id: string): Observable<SlideInfo> {
+    return this.http.get(this.baseUrl + "/slide/" + id, httpOptions)
+      .pipe(
+        map(SlideInfo.createInstance)
+      )
   }
 }
