@@ -4,6 +4,8 @@ export class SlideInfo {
         return new SlideInfo(slideNum, isFirstSlide, isLastSlide, imagePath, audioPath, text);
     }
 
-    constructor(public slideNum: string, public isFirstSlide: boolean, public isLastSlide: boolean, public imagePath: string,
+    constructor(public slideNum: number, public isFirstSlide: boolean, public isLastSlide: boolean, public imagePath: string,
         public audioPath: string, public text: string) { }
+
+
 }

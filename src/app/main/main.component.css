@@ -12,3 +12,10 @@ div[class^="col"]{
 #textDiv{
     text-align: left !important;
 }
+
+#errorDiv{
+    margin-top: 17%;
+    border: 1px solid black;
+    width: 80%;
+    margin-left:10%;
+}

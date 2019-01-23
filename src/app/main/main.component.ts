@@ -10,6 +10,8 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class MainComponent implements OnInit {
     public slide: SlideInfo;
+    public isLoading: boolean = true;
+    public isError: boolean = false;
     constructor(
         private slideService: SlideService,
         private route: ActivatedRoute,
@@ -33,15 +35,38 @@ export class MainComponent implements OnInit {
     }
 
     getSlide(): void {
-        const id = this.route.snapshot.paramMap.get("id")
-        this.slideService.getSlide(id)
-            .subscribe(data => {
-                this.slide = data
-                console.log(this.slide);
-            });
+        const id = +this.route.snapshot.paramMap.get("id");
+        if (this.isValidId(id)) {
+            this.slideService.getSlide(id)
+                .subscribe(data => {
+                    // setTimeout(() => {
+                    //     this.slide = data;
+                    //     console.log(this.slide);
+                    //     this.isLoading = false;
+                    // }, 2000);
+
+                    this.slide = data;
+                    console.log(data);
+                    this.isLoading = false;
+                }, error => {
+                    if (error.status === 404) {
+                        this.isLoading = false;
+                        this.isError = true;
+                    }
+                });
+        }
+        else {
+            //navigate to slide 1 if any incorrect slide number
+            this.changeSlide(1);
+        }
     }
 
     changeSlide(newSlideNum): void {
+        console.log(newSlideNum);
         this.router.navigate(['presentation', newSlideNum]);
+    }
+
+    isValidId(id): boolean {
+        return (id != undefined && id != NaN && id != 0 && (/^\d+$/.test(id)));
     }
 }

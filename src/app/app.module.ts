@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { ImageComponent } from './image/image.component';
 import { AudioComponent } from './audio/audio.component';
 import { TextComponent } from './text/text.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { TextComponent } from './text/text.component';
     MainComponent,
     ImageComponent,
     AudioComponent,
-    TextComponent
+    TextComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
