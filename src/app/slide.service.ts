@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { SlideInfo } from './SlideInfo';
 import { map } from 'rxjs/operators';
 
-const options = {
+const optionsHeader = {
   headers: new HttpHeaders(
     { 'Content-Type': 'application/json' }
   )
@@ -22,7 +22,7 @@ export class SlideService {
   }
 
   public getSlide(id: number): Observable<SlideInfo> {
-    return this.http.get<SlideInfo>(this.baseUrl + "/slide/" + id, options)
+    return this.http.get<SlideInfo>(this.baseUrl + "/slide/" + id, optionsHeader)
     // .pipe(
     //   map(SlideInfo.createInstance)
     // )
